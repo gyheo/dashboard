@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/webjars/bootstrap/4.6.0/css/bootstrap.min.css">
+    <title>create</title>
+</head>
+<body>
+    <table class="table table-condensed">
+        <thead>
+            <th>사용자 ID</th>
+            <th>이름</th>
+            <th>이메일</th>
+        </thead>
+        <tbody>
+            {{#users}}
+            <tr>
+                <td>{{name}}</td>
+                <td>{{userID}}</td>
+                <td>{{email}}</td>
+            </tr>
+            {{/users}}
+        </tbody>
+    </table>
+    <script src="/webjars/jquery/3.2.1/dist/jquery.min.js"></script>
+</body>
+</html>
