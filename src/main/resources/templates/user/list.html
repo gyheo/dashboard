@@ -8,6 +8,7 @@
     <title>create</title>
 </head>
 <body>
+    {{> /include/navigation}}
     <table class="table table-condensed">
         <thead>
             <th>사용자 ID</th>
@@ -17,9 +18,10 @@
         <tbody>
             {{#users}}
             <tr>
-                <td>{{name}}</td>
                 <td>{{userID}}</td>
+                <td>{{name}}</td>
                 <td>{{email}}</td>
+                <td><a href="/users/{{id}}/form" class='btn btn-primary'>수정</a></td>
             </tr>
             {{/users}}
         </tbody>
