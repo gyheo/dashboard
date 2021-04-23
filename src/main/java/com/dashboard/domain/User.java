@@ -3,15 +3,16 @@ package com.dashboard.domain;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
 public class User {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable=false, length=20)
+    @Column(nullable=false, length=20, unique = true)
     private String userID;
     
     private String name;
@@ -22,8 +23,20 @@ public class User {
         this.name = name;
     }
 
+    public boolean matchID(Long newID) {
+        if (newID == null) {
+            return false;
+        }
+
+        return newID.equals(id);
+    }
+
     public void setUserID(String userID) {
         this.userID = userID;
+    }
+
+    public String getPassword() {
+        return this.password;
     }
 
     public void setPassword(String password) {
