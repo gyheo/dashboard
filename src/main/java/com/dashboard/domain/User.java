@@ -19,6 +19,10 @@ public class User {
     private String password;
     private String email;
 
+    public String getUserID() {
+        return this.userID;
+    }
+    
     public void setName(String name) {
         this.name = name;
     }
