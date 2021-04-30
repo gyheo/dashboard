@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {{> /include/header}}
+</head>
+<body>
+    {{> /include/navigation}}
+    <div class="container">
+        <h1>게시글</h1>
+        {{#question}}
+        <h4>작성자</h4>
+        <a href="">{{writer.userID}}</a>
+        <br>
+        <h4>게시일</h4>
+        {{formattedCreateDate}}
+        <h4>내용</h4>
+        {{contents}}
+        {{/question}}<br>
+        <ul class="list-group list-group-horizontal" style="padding: 0px">
+            <li class="list-group-item" style="border: 0px"><a href="/questions/{{id}}/form" class="btn btn-primary">수정</a></li>
+            <li class="list-group-item" style="border: 0px">
+                <form action="/questions/{{id}}" method="POST">
+                <input type="hidden" name="_method" value="DELETE">
+                <button class="btn btn-danger" type="submit">삭제</button>
+                </form>
+            </li>
+            <li class="list-group-item" style="border: 0px"><a class="btn btn-success" href="/">목록</a></li>
+        </ul>
+    </div>
+    <script src="/webjars/jquery/3.2.1/dist/jquery.min.js"></script>
+</body>
+</html>

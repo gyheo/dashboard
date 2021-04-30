@@ -6,19 +6,21 @@
 <body>
     {{> /include/navigation}}
     <div class="container">
-        <h1>게시글 입력</h1>
-        <form method="post" action="/questions">
+        <h1>게시글 수정</h1>
+        <form method="post" action="/questions/{{id}}">
+        {{#question}}
         <br>
             <div class="form-floating">
                 <label for="title">제목</label>
-                <textarea class="form-control" placeholder="제목" name="title"></textarea>
+                <textarea class="form-control" placeholder="제목" name="title">{{title}}</textarea>
             </div>
             <div class="form-floating">
                 <label for="contents">내용</label>
-                <textarea class="form-control" placeholder="내용" name="contents"></textarea>
+                <textarea class="form-control" placeholder="내용" name="contents">{{contents}}</textarea>
             </div>
-            <button type="submit" class="btn btn-primary">게시</button>
+            <button type="submit" class="btn btn-primary">수정</button>
         </form>
+        {{/question}}
         <br>
     </div>
     <script src="/webjars/jquery/3.2.1/dist/jquery.min.js"></script>
