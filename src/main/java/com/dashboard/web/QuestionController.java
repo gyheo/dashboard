@@ -1,16 +1,14 @@
 package com.dashboard.web;
 
-import javax.servlet.http.HttpSession;
-
 import com.dashboard.domain.Question;
 import com.dashboard.domain.QuestionRepository;
 import com.dashboard.domain.User;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/questions")
@@ -34,9 +32,37 @@ public class QuestionController {
         }
 
         User sessionUser = HttpSessionUtils.getUserFromSession(session);
-        Question newQuestion = new Question(sessionUser.getUserID(), title, contents);
+        Question newQuestion = new Question(sessionUser, title, contents);
         questionRepository.save(newQuestion);
 
+        return "redirect:/";
+    }
+
+    @GetMapping("/{id}")
+    public String show(@PathVariable Long id, Model model) {
+        model.addAttribute("question", questionRepository.findById(id).get());
+
+        return "qna/show";
+    }
+
+    @GetMapping("/{id}/form")
+    public String updateForm(@PathVariable Long id, Model model) {
+        model.addAttribute("question", questionRepository.findById(id).get());
+
+        return "qna/updateForm";
+    }
+
+    @PostMapping("/{id}")
+    public String update(@PathVariable Long id, String title, String contents) {
+        Question question = questionRepository.findById(id).get();
+        question.update(title, contents);
+        questionRepository.save(question);
+        return "redirect:/";
+    }
+
+    @DeleteMapping("/{id}")
+    public String delete(@PathVariable Long id) {
+        questionRepository.deleteById(id);
         return "redirect:/";
     }
 }
