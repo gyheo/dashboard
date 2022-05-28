@@ -8,8 +8,10 @@
 <body>
     {{> /include/navigation}} 
     <div class="container">
+        {{#user}}
         <form method="POST" action="/users/{{id}}">
-            {{#user}}
+            <!-- HTML Form 태그는 POST, GET만 지원 -->
+            <input type="hidden" name="_method" value="PUT">
             <div class="mb-3 row">
                 <label for="name" class="col-sm-2 col-form-label">이름</label>
                 <div class="col-sm-10">
